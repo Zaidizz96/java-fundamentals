@@ -3,13 +3,9 @@
  */
 package basiclibrary;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class Library {
-    public boolean someLibraryMethod() {
-        return true;
-    }
 
     public static void main(String[] args) {
         int[] num = roll(7);
@@ -22,6 +18,18 @@ public class Library {
         int[] testAvg = { 4 , 7 , 2 , 7};
         System.out.println(calculatingAverages(testAvg));
 
+        printLowesAvgTem();
+
+        analyzingWeatherData();
+
+        tallyingElection();
+    }
+
+    public boolean someLibraryMethod() {
+        return true;
+    }
+
+    public static void printLowesAvgTem() {
         int[][] weeklyMonthTemperatures = {
                 {66, 64, 58, 65, 71, 57, 60},
                 {57, 65, 65, 70, 72, 65, 51},
@@ -86,5 +94,84 @@ public class Library {
             sum += num;
         }
         return (double) sum / array.length;
+    }
+
+    public static void analyzingWeatherData() {
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
+        };
+        Set<Integer> temp = new HashSet<>();
+        List<Integer> list = new ArrayList<>();
+
+        // fill hash set from array to be unique
+        for (int[] numArr : weeklyMonthTemperatures) {
+            for (int i = 0; i < numArr.length; i++) {
+                temp.add(numArr[i]);
+            }
+        }
+
+        // remove duplicate
+        list.addAll(temp);
+        // sort list
+        Collections.sort(list);
+
+        int maxTemp = Collections.max(list);
+        int minTemp = Collections.min(list);
+
+        System.out.println("High: " + maxTemp);
+        System.out.println("Low: " + minTemp);
+        getMissingNum(list, minTemp, maxTemp).forEach(integer ->
+                System.out.println("Never saw temperature: " + integer));
+    }
+
+    public static List<Integer> getMissingNum(List<Integer> arrList, int minNum, int maxNum) {
+        List<Integer> newList = new ArrayList<>();
+
+        for (int i = minNum; i <= maxNum; i++) {
+            if (!arrList.contains(i)) {
+                newList.add(i);
+            }
+        }
+        return newList;
+    }
+
+    public static void tallyingElection() {
+        //second task
+        List<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+        Collections.sort(votes);
+        System.out.println(tally(votes));
+    }
+
+    public static String tally(List<String> votesList) {
+        // remove duplicate items
+        Set<String> winners = new HashSet<>(votesList);
+        Map<String, Integer> winnerMap = new HashMap<>();
+
+        // loop through winners set . and put it in Map<String , Integer>
+        for (String names : winners) {
+            winnerMap.put(names, Collections.frequency(votesList, names));
+        }
+
+        // iteration over Map to get the winner that most repeated .
+        String key = "";
+        for (Map.Entry<String, Integer> entry : winnerMap.entrySet()) {
+            if (entry.getValue().equals(Collections.max(winnerMap.values()))) {
+                key = entry.getKey();
+            }
+        }
+
+        return key;
     }
 }
