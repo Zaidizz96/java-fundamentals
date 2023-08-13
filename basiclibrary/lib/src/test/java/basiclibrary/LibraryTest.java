@@ -4,10 +4,14 @@
 package basiclibrary;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
-    @Test void someLibraryMethodReturnsTrue() {
+    @Test
+    void someLibraryMethodReturnsTrue() {
         Library classUnderTest = new Library();
         assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
     }
@@ -30,13 +34,11 @@ class LibraryTest {
         int[] arrWithDuplicates = {1, 2, 3, 4, 5, 2};
         assertTrue(Library.containsDuplicates(arrWithDuplicates), "Array contains duplicates");
     }
-
     @Test
     void testContainsDuplicatesWithoutDuplicates() {
         int[] arrWithoutDuplicates = {1, 2, 3, 4, 5};
         assertFalse(Library.containsDuplicates(arrWithoutDuplicates), "Array doesn't contain duplicates");
     }
-
     @Test
     void testCalculatingAverages() {
         int[] arr = {10, 20, 30, 40, 50};
@@ -45,7 +47,6 @@ class LibraryTest {
         int calculatedAverage = Library.calculatingAverages(arr);
         assertEquals(expectedAverage, calculatedAverage, "Average calculation is incorrect");
     }
-
     @Test
     void testFindLowestAverageIndex() {
         int[][] arrays = {
@@ -66,5 +67,64 @@ class LibraryTest {
 
         double calculatedAverage = Library.calculateAverage(array);
         assertEquals(expectedAverage, calculatedAverage, 0.001, "Average calculation is incorrect");
+    }
+
+    @Test
+    void testAnalyseWeatherSingleDay(){
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
+        };
+
+        Set<Integer> temp = new HashSet<>();
+        List<Integer> list = new ArrayList<>();
+
+        // fill hash set from array to be unique
+        for (int[] numArr : weeklyMonthTemperatures) {
+            for (int i = 0; i < numArr.length; i++) {
+                temp.add(numArr[i]);
+            }
+        }
+        // remove duplicate
+        list.addAll(temp);
+        // sort list
+        Collections.sort(list);
+
+        int maxTemp = Collections.max(list);
+        int minTemp = Collections.min(list);
+
+        int expectedMaxTemp = 72;
+        int expectedMinTemp = 51;
+        List<Integer> expectedMissingNum = new ArrayList<>();
+        expectedMissingNum.add(63);
+        expectedMissingNum.add(67);
+        expectedMissingNum.add(68);
+        expectedMissingNum.add(69);
+
+        List<Integer> result = Library.getMissingNum(list, minTemp, maxTemp);
+        assertEquals(expectedMaxTemp , maxTemp);
+        assertEquals(expectedMinTemp , minTemp);
+        assertEquals(expectedMissingNum , result);
+    }
+
+    @Test
+    void testTallyingElection(){
+        List<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+        Collections.sort(votes);
+
+        String expectedTally = "Bush";
+        String result = Library.tally(votes);
+        assertEquals(expectedTally , result);
     }
 }
