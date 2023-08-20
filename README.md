@@ -1,6 +1,30 @@
 # java-fundamentals
 
 The code contains several functions that perform various operations on arrays of integers.
+---
+# lab_01
+---
+## Pluralize Function
+
+File: `PluralizeFunction.java`
+
+This file contains a function named `pluralize` that takes a word and a number as inputs and returns the pluralized form of the word if the number is greater than one.
+
+## Flipping Coins Function
+
+File: `FlippingCoinsFunction.java`
+
+This file implements a function called `flipNHeads` which simulates flipping coins until a specified number of heads are flipped in a row.
+
+## Command Line Clock Function
+
+File: `CommandLineClockFunction.java`
+
+This file includes a function named `clock` that prints the current time to the console, updating every second. The program continues until manually stopped.
+
+---
+# lab02
+---
 
 ## `roll` Function
 
