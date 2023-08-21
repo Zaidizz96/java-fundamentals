@@ -72,5 +72,49 @@ for (int temperature : lowestAverageArray) {
 The `findLowestAverageIndex` function calculates the average temperature for each sub-array in the `weeklyMonthTemperatures` array and returns the index of the sub-array with the lowest average. The code then prints the elements of the sub-array with the lowest average temperature.
 
 ---
+# lab06
 
-This code provides examples of various array manipulation operations, including generating random numbers, checking for duplicates, calculating averages, and finding the sub-array with the lowest average. It can serve as a starting point for further exploration and development of similar functionalities in Java applications.
+---
+## Introduction
+
+In this project, I've implemented a restaurant review system using Java. The system consists of two main classes: `Restaurant` and `Review`. The `Restaurant` class represents individual restaurants, while the `Review` class holds information about user reviews for those restaurants.
+
+## Classes
+
+### Restaurant Class
+
+The `Restaurant` class represents a restaurant and contains the following attributes and methods:
+
+- `name`: The name of the restaurant.
+- `rate`: The average rating of the restaurant.
+- `price`: The price category of the restaurant.
+- `reviewList`: A list of reviews associated with the restaurant.
+
+Methods:
+
+- `addReview(Review review)`: Associates a review with the restaurant and recalculates the average rating.
+    - This method checks if the review is not already associated with the restaurant, then adds the review to the `reviewList`.
+    - It calculates the new average rating by summing up the stars from all reviews and dividing by the number of reviews.
+
+### Review Class
+
+The `Review` class represents a review and contains the following attributes and methods:
+
+- `author`: The author of the review.
+- `body`: The text content of the review.
+- `numberOfStars`: The number of stars given in the review.
+- `restaurant`: The restaurant that the review is about.
+
+## Usage
+
+To use the restaurant review system, you can create instances of the `Restaurant` and `Review` classes as shown in the example below:
+
+```java
+// Creating a restaurant
+Restaurant restaurant = new Restaurant("Sample Restaurant", 2.0);
+
+// Creating a review and associating it with the restaurant
+Review review = new Review("John Doe", "Great food and service!", 4, restaurant);
+
+// Associating the review with the restaurant
+restaurant.addReview(review);

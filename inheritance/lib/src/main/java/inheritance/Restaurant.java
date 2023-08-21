@@ -18,16 +18,18 @@ public class Restaurant  {
     }
 
     void addReview(Review review) {
-        int totalReviewStarts = 0;
-        getReviewList().add(review);
+        boolean isExist = false;
 
         for (Review review1 : getReviewList()) {
-            totalReviewStarts += review1.getNumberOfStars();
-            if (!review.equals(review1)) {
-                System.out.println(" ++++++++++++++++ " + totalReviewStarts + " size = " + getReviewList().size());
-                System.out.println(" ++++++++++++++++ " + (totalReviewStarts/getReviewList().size()));
-                setRate((totalReviewStarts/getReviewList().size()));
+            if (review.equals(review1)) {
+                isExist = true;
             }
+        }
+
+        if (!isExist) {
+            getReviewList().add(review);
+            int totalReviewStars = getReviewList().stream().map((review1) -> review1.getNumberOfStars()).reduce(0,Integer::sum);
+            setRate(((double) totalReviewStars/getReviewList().size()));
         }
     }
 
