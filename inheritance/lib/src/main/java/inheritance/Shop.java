@@ -3,24 +3,19 @@ package inheritance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Restaurant implements ReviewMethod {
+public class Shop implements ReviewMethod {
+
     private String name;
-
+    private String description;
+    private int numberOfDollarSigns;
     private double rate;
+    List<Review> reviewList = new ArrayList<>();
 
-    private double price;
-
-    private List<Review> reviewList = new ArrayList<>();
-
-    public Restaurant(String name, double price) {
+    public Shop(String name, String description, int numberOfDollarSigns) {
         this.name = name;
-        this.price = price;
+        this.description = description;
+        this.numberOfDollarSigns = numberOfDollarSigns;
     }
-
-    public List<Review> getReviewList() {
-        return reviewList;
-    }
-
     @Override
     public void addReview(Review review) {
         boolean isExist = false;
@@ -34,7 +29,7 @@ public class Restaurant implements ReviewMethod {
         if (!isExist) {
             getReviewList().add(review);
             int totalReviewStars = getReviewList().stream().map((review1) ->
-               review1.getNumberOfStars()).reduce(0, Integer::sum);
+                    review1.getNumberOfStars()).reduce(0, Integer::sum);
             setRate(((double) totalReviewStars / getReviewList().size()));
         }
     }
@@ -47,12 +42,28 @@ public class Restaurant implements ReviewMethod {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getNumberOfDollarSigns() {
+        return numberOfDollarSigns;
+    }
+
+    public void setNumberOfDollarSigns(int numberOfDollarSigns) {
+        this.numberOfDollarSigns = numberOfDollarSigns;
+    }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 
     public double getRate() {
@@ -66,19 +77,14 @@ public class Restaurant implements ReviewMethod {
         this.rate = rate;
     }
 
-
-    public void setReviewList(List<Review> reviewList) {
-        this.reviewList = reviewList;
-    }
-
     @Override
     public String toString() {
-        return "Restaurant{" +
+        return "Shop{" +
                 "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", numberOfDollarSigns=" + numberOfDollarSigns +
                 ", rate=" + rate +
-                ", price=" + price +
                 ", reviewList=" + reviewList +
                 '}';
     }
-
 }

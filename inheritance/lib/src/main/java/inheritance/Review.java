@@ -2,12 +2,16 @@ package inheritance;
 
 import java.util.Objects;
 
-public class Review {
+public  class Review {
+
     private String author;
     private String body;
     private Integer numberOfStars = 0;
-
     private Restaurant restaurant;
+    private Shop shop;
+
+    private Theater theater;
+    private String movie;
 
     public Review(String author, String body, Integer numberOfStars, Restaurant restaurant) {
         this.author = author;
@@ -17,30 +21,41 @@ public class Review {
         restaurant.addReview(this);
     }
 
-    public String getAuthor() {
-        return author;
+    public Review(String author, String body, Integer numberOfStars , Shop shop) {
+        this.author = author;
+        this.body = body;
+        this.numberOfStars = numberOfStars;
+        this.shop = shop;
+        shop.addReview(this);
     }
 
-    public void setAuthor(String author) {
+    public Review(String author, String body, Integer numberOfStars, String movie , Theater theater) {
         this.author = author;
+        this.body = body;
+        this.numberOfStars = numberOfStars;
+        this.movie = movie;
+        this.theater = theater;
+        theater.addReview(this);
+    }
+    public Review(String author, String body, Integer numberOfStars, Theater theater) {
+        this.author = author;
+        this.body = body;
+        this.numberOfStars = numberOfStars;
+        this.theater = theater;
+        theater.addReview(this);
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
-
     public Integer getNumberOfStars() {
         return numberOfStars;
     }
-
-    public void setNumberOfStars(Integer numberOfStars) {
-        this.numberOfStars = numberOfStars;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,12 +64,14 @@ public class Review {
         return Objects.equals(author, review.author) &&
                 Objects.equals(body, review.body) &&
                 Objects.equals(numberOfStars, review.numberOfStars) &&
-                Objects.equals(restaurant, review.restaurant);
+                Objects.equals(restaurant, review.restaurant) &&
+                Objects.equals(shop , review.shop) &&
+                Objects.equals(theater , review.theater);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(author, body, numberOfStars, restaurant);
+        return Objects.hash(author, body, numberOfStars, restaurant , shop , theater);
     }
 
     @Override
@@ -66,3 +83,4 @@ public class Review {
                 '}';
     }
 }
+

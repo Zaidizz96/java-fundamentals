@@ -3,22 +3,15 @@ package inheritance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Restaurant implements ReviewMethod {
+public class Theater implements ReviewMethod {
     private String name;
-
     private double rate;
-
-    private double price;
-
     private List<Review> reviewList = new ArrayList<>();
+    private List<String> moviesShown = new ArrayList<>();
 
-    public Restaurant(String name, double price) {
+    public Theater(String name) {
         this.name = name;
-        this.price = price;
-    }
 
-    public List<Review> getReviewList() {
-        return reviewList;
     }
 
     @Override
@@ -30,14 +23,27 @@ public class Restaurant implements ReviewMethod {
                 isExist = true;
             }
         }
-
         if (!isExist) {
             getReviewList().add(review);
             int totalReviewStars = getReviewList().stream().map((review1) ->
-               review1.getNumberOfStars()).reduce(0, Integer::sum);
+                    review1.getNumberOfStars()).reduce(0, Integer::sum);
             setRate(((double) totalReviewStars / getReviewList().size()));
         }
     }
+    public void addMovie(String movieName) {
+
+        for ( String name : moviesShown ) {
+            if(movieName.equals(name)){
+                return;
+            }
+        }
+        this.moviesShown.add(movieName);
+    }
+
+    public void removeMovie(String movieName) {
+            this.moviesShown.remove(movieName);
+        }
+
 
     public String getName() {
         return name;
@@ -46,15 +52,6 @@ public class Restaurant implements ReviewMethod {
     public void setName(String name) {
         this.name = name;
     }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public double getRate() {
         return rate;
     }
@@ -65,20 +62,26 @@ public class Restaurant implements ReviewMethod {
         }
         this.rate = rate;
     }
-
-
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
+    }
+    public List<String> getMoviesShown() {
+        return moviesShown;
+    }
+    public void setMoviesShown(List<String> moviesShown) {
+        this.moviesShown = moviesShown;
     }
 
     @Override
     public String toString() {
-        return "Restaurant{" +
+        return "Theater{" +
                 "name='" + name + '\'' +
                 ", rate=" + rate +
-                ", price=" + price +
                 ", reviewList=" + reviewList +
+                ", moviesShown=" + moviesShown+
                 '}';
     }
-
 }
