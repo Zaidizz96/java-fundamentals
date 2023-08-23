@@ -10,13 +10,39 @@ public class Library {
 
     public static void main(String[] args) {
         try {
-            Restaurant restaurant = new Restaurant("KFC",100);
-            Review review1 = new Review("Zaid","nice",4,restaurant);
-            Review review2 = new Review("Zaid 1","just ok",3,restaurant);
-            Review review3 = new Review("Zaid 2","bad",1,restaurant);
+          Restaurant restaurant = new Restaurant("MC-Donalds" , 20);
+          Review review1 = new Review("Zaid","nice",4,restaurant);
+          Review review2 = new Review("Zaid 1","just ok",3,restaurant);
+          Review review3 = new Review("Zaid 2","bad",1,restaurant);
+          Review review4 = new Review("Zaid 2","bad",1,restaurant);
+
+        Shop shop = new Shop("amazon" , "collection stuffs" , 7);
+        Review review5 = new Review("zaid" , "very good services" , 3 , shop);
+        Review review6 = new Review("raed" , "not bad" , 4 , shop);
+        Review review7 = new Review("subhi" , "excellent!" , 5 , shop);
+        Review review8 = new Review("fouad" , "very good services" , 4 , shop);
+//
+            Theater theater = new Theater("Taj Mall");
+            Review review9 = new Review("mohammad" , "amazing" , 4  , "Batman" , theater);
+            Review review10 = new Review("khaled" , "not bad" , 3  , "Batman" , theater);
+            Review review11 = new Review("raed" , "nice" , 5 , theater);
+            Review review12 = new Review("zaid" , "amazing" , 1 , "Batman" , theater);
+//
+            theater.addMovie("Batman");
+            theater.addMovie("spiderman");
+            theater.addMovie("mad max");
+            theater.addMovie("mad max");
+
+//            theater.removeMovie("spiderman");
 
 
-            System.out.println(restaurant.toString());
+            System.out.println(theater.getMoviesShown());
+
+//          System.out.println(restaurant.toString());
+//          System.out.println(shop.toString());
+          System.out.println(theater.toString());
+
+
 
 
         }catch (Exception e){
